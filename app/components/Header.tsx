@@ -6,12 +6,7 @@ export default function Header() {
     <header className="w-full px-4 py-4">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-2 text-xl sm:text-2xl font-bold text-pink-500 whitespace-nowrap">
-          <Image
-            src="/logo.png" // path in the public folder
-            alt="BoardMates Logo"
-            width={100} // adjust size as needed
-            height={100}
-          />
+          <Image alt="logo" src={'/logo.png'} width={100} height={75} />
           BoardMates
         </div>
 
