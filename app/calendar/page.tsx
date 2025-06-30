@@ -13,10 +13,20 @@ import {
   subMonths,
   addMonths,
 } from 'date-fns';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-export default function CalendarPage() {
+type CalendarEvent = {
+  date: Date;
+  title: string;
+};
+
+export default function CalendarClient() {
   const [currentDate, setCurrentDate] = useState(new Date());
+
+  const [events] = useState<CalendarEvent[]>([
+    { date: new Date(2025, 5, 30), title: 'Rent Due' },
+    { date: new Date(2025, 5, 30), title: 'Team Meeting' },
+    { date: new Date(2025, 6, 2), title: '5K Run' },
+  ]);
 
   const som = startOfMonth(currentDate);
   const eom = endOfMonth(currentDate);
@@ -38,44 +48,64 @@ export default function CalendarPage() {
     setCurrentDate(addMonths(currentDate, 1));
   };
 
+  const getEventsForDate = (date: Date) => {
+    return events.filter(
+      (event) =>
+        event.date.getFullYear() === date.getFullYear() &&
+        event.date.getMonth() === date.getMonth() &&
+        event.date.getDate() === date.getDate(),
+    );
+  };
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-4">
+    <div className="p-6 max-w-lg mx-auto w-full">
+      <div className="relative flex items-center justify-center mb-4">
         <button
           onClick={handlePrevMonth}
-          className="text-pink-500 hover:text-pink-600 transition"
+          className="text-pink-500 hover:text-pink-600 transition absolute left-0"
           aria-label="Previous month"
         >
-          <ChevronLeft className="w-6 h-6" />
+          ←
         </button>
+
+        <h2 className="text-xl sm:text-2xl font-bold text-pink-500">
+          {format(currentDate, 'MMMM yyyy')}
+        </h2>
+
         <button
           onClick={handleNextMonth}
-          className="text-pink-500 hover:text-pink-600 transition"
+          className="text-pink-500 hover:text-pink-600 transition absolute right-0"
           aria-label="Next month"
         >
-          <ChevronRight className="w-6 h-6" />
+          →
         </button>
       </div>
-
       <div className="grid grid-cols-7 gap-2 text-center text-sm font-medium text-pink-400">
         {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
           <div key={day}>{day}</div>
         ))}
       </div>
-
       <div className="grid grid-cols-7 gap-2 mt-2">
         {dates.map((date) => (
           <div
             key={date.getTime()}
-            className={`p-2 rounded text-sm cursor-pointer transition
+            className={`p-2 rounded text-sm cursor-pointer transition flex flex-col items-center justify-center aspect-square
               ${
                 isSameMonth(date, currentDate)
-                  ? 'bg-[#fff0eb] text-pink-500'
+                  ? 'bg-[#fff0eb] text-pink-700'
                   : 'bg-white text-pink-200'
               }
-              ${isToday(date) ? 'border border-pink-500 font-semibold' : ''}`}
+              ${isToday(date) ? 'border border-pink-500 font-semibold' : ''}
+            `}
           >
             {format(date, 'd')}
+            <div className="flex gap-[2px] mt-1 flex-wrap justify-center">
+              {getEventsForDate(date).map((_, idx) => (
+                <span
+                  key={idx}
+                  className="w-1.5 h-1.5 rounded-full bg-pink-500"
+                ></span>
+              ))}
+            </div>
           </div>
         ))}
       </div>
