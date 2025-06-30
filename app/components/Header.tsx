@@ -12,7 +12,6 @@ export default function Header() {
           <Link href="/calendar" className="hover:text-pink-600">Calendar</Link>
           <Link href="/shopping" className="hover:text-pink-600">Shopping</Link>
           <Link href="/bills" className="hover:text-pink-600">Bills</Link>
-          <Link href="/login" className="hover:text-pink-600">Login</Link>
         </nav>
         <button className="bg-pink-500 text-white text-sm px-4 py-2 rounded-full hover:bg-pink-600 transition whitespace-nowrap">
           + Add
