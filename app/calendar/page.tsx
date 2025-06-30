@@ -67,19 +67,19 @@ export default function CalendarClient() {
           ←
         </button>
 
-        <h2 className="text-xl sm:text-2xl font-bold text-pink-500">
+        <h2 className="text-xl sm:text-2xl font-bold text-red-300">
           {format(currentDate, 'MMMM yyyy')}
         </h2>
 
         <button
           onClick={handleNextMonth}
-          className="text-pink-500 hover:text-pink-600 transition absolute right-0"
+          className="text-red-300 hover:text-pink-600 transition absolute right-0"
           aria-label="Next month"
         >
           →
         </button>
       </div>
-      <div className="grid grid-cols-7 gap-2 text-center text-sm font-medium text-pink-400">
+      <div className="grid grid-cols-7 gap-2 text-center text-sm font-medium text-red-300">
         {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
           <div key={day}>{day}</div>
         ))}
@@ -92,7 +92,7 @@ export default function CalendarClient() {
               ${
                 isSameMonth(date, currentDate)
                   ? 'bg-[#fff0eb] text-pink-700'
-                  : 'bg-white text-pink-200'
+                  : 'bg-white text-red-300'
               }
               ${isToday(date) ? 'border border-pink-500 font-semibold' : ''}
             `}
@@ -102,7 +102,7 @@ export default function CalendarClient() {
               {getEventsForDate(date).map((_, idx) => (
                 <span
                   key={idx}
-                  className="w-1.5 h-1.5 rounded-full bg-pink-500"
+                  className="w-1.5 h-1.5 rounded-full bg-red-300"
                 ></span>
               ))}
             </div>

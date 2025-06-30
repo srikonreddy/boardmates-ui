@@ -6,9 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+     "orval": "orval",
+  "orval:watch": "orval --watch"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.81.5",
     "date-fns": "^4.1.0",
     "lucide-react": "^0.525.0",
     "next": "15.3.2",
@@ -23,6 +26,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
+    "orval": "^7.10.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
